@@ -1,14 +1,18 @@
-const express = require("express");
-const mongoose = require("mongoose");
-const bodyParser = require("body-parser");
+const fs = require('fs');
+const { ApolloServer, gql } = require('apollo-server-express');
+const cors = require('cors');
 const chalk = require("chalk");
 
+const express = require("express");
+var bodyParser = require("body-parser");
+const mongoose = require("mongoose");
 //import routers
 const booksRouter = require("./routers/books");
 
-//import middlewares
-const errorLogger = require("./middlewares/logger");
-const logRequestMethod = require("./middlewares/requestMethodLogger");
+
+//import resolvers and types
+const typeDefs = gql(fs.readFileSync("./graphql/schema.graphql", { encoding: 'utf8' }))
+const resolvers = require("./graphql/resolvers")
 
 //connect app to database
 mongoose.connect(
@@ -19,31 +23,31 @@ mongoose.connect(
   }
 );
 
+const port = 4545;
+
+
 //initialize server
 const app = express();
+
+//apollo server
+const graphqlPath = '/graphql';
+const apolloServer = new ApolloServer({typeDefs, resolvers})
+apolloServer.applyMiddleware({ app, path: graphqlPath })
+
+
+
 
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }));
 // parse application/json
 app.use(bodyParser.json());
 
-// app.use(function (req, res) {
-//   res.setHeader("Content-Type", "application/json");
-//   res.write("you posted:\n");
-//   res.end(JSON.stringify(req.body, null, 2));
-// });
-
-//use logger middleware for all routes
-// app.use('/', errorLogger());
-app.use(logRequestMethod);
-
 //call routes
 //1. books route
-// app.use("/", booksRouter);
 app.use(booksRouter);
 
 //open an express server
-app.listen(4545, () => {
+app.listen(port, () => {
   console.log(chalk.green("Books service server started."));
 });
 
