@@ -7,12 +7,12 @@ type Mutation {
 type Book {
   title: String
   author: String
-  numberPages: String
+  numberPages: Int
   publisher: String
 }
 input CreateBookInput {
   title: String
   author: String
-  numberPages: String
+  numberPages: Int
   publisher: String
 }

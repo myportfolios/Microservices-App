@@ -2,12 +2,12 @@
 const Books = require('../models/books')
 
 exports.createBook = async (req, res) => {
-    try{
-        const newBook = new Books({...req.body})
-        await newBook.save();
-        res.send(newBook)
+    try {
+        const book = new Books({ ...req.body })
+        await book.save();
+        res.send(book)
     }
-    catch(err){  
-          res.status(500).send(err)
+    catch (err) {
+        res.status(500).send(err)
     }
 }
