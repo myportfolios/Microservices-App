@@ -1,31 +1,18 @@
 type Query {
-  company(id: ID!): Company
-  job(id: ID!): Job
-  jobs: [Job]
-  login(email: String, password: String): Login!
+  books: [Book]
 }
 type Mutation {
-  createJob(input: CreateJobInput): Job
+  createBook(input: CreateBookInput!): Book
 }
-type Company {
-  id: ID!
-  name: String
-  description: String
-  jobs: [Job]
-}
-type Job {
-  id: ID!
+type Book {
   title: String
-  company: Company
-  description: String
+  author: String
+  numberPages: String
+  publisher: String
 }
-type Login {
-  id: ID
-  email: String!
-  password: String!
-  company: Company
-}
-input CreateJobInput {
+input CreateBookInput {
   title: String
-  description: String
+  author: String
+  numberPages: String
+  publisher: String
 }
