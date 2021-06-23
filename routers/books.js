@@ -9,9 +9,9 @@ router.get("/", testPageController);
 
 //create book
 router.post("/books/create", bookController.createBook);
-router.get('/books/:id', bookController.getBook)
+router.get('/book/:id', bookController.getBook)
 router.get('/books', bookController.getAllBooks)
-router.delete('/books/:id', bookController.deleteABook)
+router.delete('/book/:id', bookController.deleteABook)
 
 
 

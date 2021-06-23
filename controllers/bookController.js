@@ -5,7 +5,7 @@ exports.createBook = async (req, res) => {
     try {
         const book = new Books({ ...req.body })
         await book.save();
-        console.log("book", book)
+        res.send(book)
     }
     catch (err) {
         res.status(500).send(err)
@@ -15,6 +15,10 @@ exports.getBook = async (req, res) => {
     try {
         const id = req.params.id;
         const searchedBook = await Books.findById(id);
+        if (!searchedBook) {
+            return res.status(404).send()
+        }
+
         res.send(searchedBook)
     }
     catch (e) {
@@ -34,6 +38,9 @@ exports.deleteABook = async (req, res) => {
     try {
         const id = req.params.id;
         const book = await Books.findByIdAndDelete(id);
+        if (!book) {
+            return res.status(404).send()
+        }
         res.send(book)
     }
     catch (e) {
