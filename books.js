@@ -16,7 +16,7 @@ const resolvers = require("./graphql/resolvers")
 
 //connect app to database
 mongoose.connect(
-  "mongodb+srv://admin102:obt55BpjpXpvLDQR@cluster0.pelnl.mongodb.net/myFirstDatabase?retryWrites=true&w=majority",
+  "mongodb+srv://admin102:obt55BpjpXpvLDQR@cluster0.pelnl.mongodb.net/Books-Microservice?retryWrites=true&w=majority",
   { useUnifiedTopology: true, useNewUrlParser: true },
   () => {
     console.log(chalk.green("connection to database successful!"));
