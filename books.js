@@ -19,7 +19,7 @@ mongoose.connect(
   "mongodb+srv://admin102:obt55BpjpXpvLDQR@cluster0.pelnl.mongodb.net/Books-Microservice?retryWrites=true&w=majority",
   { useUnifiedTopology: true, useNewUrlParser: true },
   () => {
-    console.log(chalk.green("connection to database successful!"));
+    console.log(chalk.green("connection to database successful on!"));
   }
 );
 
@@ -48,7 +48,7 @@ app.use(booksRouter);
 
 //open an express server
 app.listen(port, () => {
-  console.log(chalk.green("Books service server started."));
+  console.log(chalk.green(`Books service server started on port ${port}`));
 });
 
 // obt55BpjpXpvLDQR
